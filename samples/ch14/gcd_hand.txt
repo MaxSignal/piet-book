@@ -1,0 +1,6 @@
+r5G.bg5ymmmM6cM.#   ; inn inn → ループ: dup not pointer dup push3 push1 roll mod
+..#..............   ; 白の帰り道（左向き）
+.......g#......#.   ; 出口: 白を滑り落ちて g に入る
+.......3y#.......   ; pop → out(number)
+......#yy#.......   ; 終端ブロック
+.......##........

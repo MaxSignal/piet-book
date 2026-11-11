@@ -1,0 +1,9 @@
+// 練習問題 2: 各桁の和
+read n;
+s = 0;
+while (n > 0) {
+  s = s + n % 10;
+  n = n / 10;
+}
+print s;
+putc '\n';

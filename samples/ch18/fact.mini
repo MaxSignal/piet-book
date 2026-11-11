@@ -1,0 +1,8 @@
+// 階乗 n! を 1! から 10! まで表示する
+n = 1;
+f = 1;
+while (n <= 10) {
+  f = f * n;
+  print n; prints "! = "; print f; putc '\n';
+  n = n + 1;
+}

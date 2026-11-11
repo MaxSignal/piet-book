@@ -1,0 +1,7 @@
+n = 1;
+f = 1;
+while (n < 8) {
+  f = f * n;
+  print n; prints "! = "; print f; putc '\n';
+  n = n + 1;
+}

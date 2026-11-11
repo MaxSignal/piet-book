@@ -1,0 +1,10 @@
+// ユークリッドの互除法: 2 つの数を読んで最大公約数を表示
+read a;
+read b;
+while (b != 0) {
+  t = a % b;
+  a = b;
+  b = t;
+}
+print a;
+putc '\n';

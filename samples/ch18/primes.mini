@@ -1,0 +1,14 @@
+// 2 以上 n 以下の素数をすべて表示する
+read n;
+p = 2;
+while (p <= n) {
+  d = 2;
+  isprime = 1;
+  while (d * d <= p and isprime) {
+    if (p % d == 0) { isprime = 0; }
+    d = d + 1;
+  }
+  if (isprime) { print p; putc ' '; }
+  p = p + 1;
+}
+putc '\n';
