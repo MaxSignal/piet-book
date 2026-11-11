@@ -1,0 +1,5 @@
+/* 後半（モノクロの付録）は大きめの文字で読みやすく */
+.mono .prose { font-size: 9.6pt; line-height: 1.8; }
+.mono .prose pre { font-size: 8.8pt; line-height: 1.55; }
+.mono .prose pre.grid { font-size: 9pt; }
+.mono .prose table { font-size: 8.6pt; }

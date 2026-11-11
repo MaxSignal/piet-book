@@ -1,0 +1,27 @@
+/* 版D: 1 冊に「付録以外すべてカラー」を収めるための詰めたレイアウト（読みやすさは保つ範囲で） */
+@page { margin-top: 17mm; margin-bottom: 17mm; }
+@page :left { margin-left: 13mm; margin-right: 21mm; @top-left { padding-bottom: 3mm; } @bottom-left { padding-top: 5mm; } }
+@page :right { margin-left: 21mm; margin-right: 13mm; @top-right { padding-bottom: 3mm; } @bottom-right { padding-top: 5mm; } }
+html { font-size: 8.8pt; line-height: 1.7; }
+.prose p { margin-bottom: 0.7em; }
+.prose h2 { margin: 6.5mm 0 2.5mm; font-size: 12.5pt; }
+.prose h3 { margin: 4.5mm 0 1.5mm; }
+.prose pre { font-size: 7pt; padding: 2mm 2.5mm; margin-bottom: 0.8em; }
+.prose pre.trace { font-size: 6.7pt; }
+.mono .prose pre { font-size: 8pt; }
+.admonition { padding: 1.8mm 2.8mm 0.4mm; margin-bottom: 0.9em; }
+figure { margin: 1.5mm 0 4mm; }
+.pfig .pimg { padding: 2mm 0 1.6mm; }
+.prun { padding: 0.8mm 0; gap: 0.5mm; }
+.ch-open { margin-bottom: 6mm; }
+.ch-title { font-size: 21pt; }
+/* 章や部を右ページ始まりにせず、白ページを作らない（改丁→改ページ） */
+section.chapter, section.appendix, section.front, section.toc { break-before: page; }
+section#appD, section#appE, section#appF, section#appG, section#index { break-before: page; }
+.part-open { break-before: page; break-after: page; }
+.titleverso { break-after: page; }
+/* 後半（モノクロの付録）は大きめの文字で読みやすく */
+.mono .prose { font-size: 9.6pt; line-height: 1.8; }
+.mono .prose pre { font-size: 8.8pt; line-height: 1.55; }
+.mono .prose pre.grid { font-size: 9pt; }
+.mono .prose table { font-size: 8.6pt; }

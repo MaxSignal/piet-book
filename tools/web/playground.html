@@ -1,0 +1,97 @@
+<main><div class="pg">
+<header class="pg-head">
+<h1>プレイグラウンド</h1>
+<p>Piet のプログラムを描いて、その場で実行できます。パレットで色を選び、格子をクリック（ドラッグ）して塗ります。
+色を選ぶと、パレットの各マスに「今の色からその色へ移ったときに実行される命令」が表示されます。
+次に置くブロックの色は、実行したい命令が書かれたマスから選んでください。</p>
+</header>
+
+<div class="pg-layout">
+<section class="pg-editor" aria-label="エディタ">
+<div class="pg-toolbar">
+  <div class="pg-tools" role="group" aria-label="道具">
+    <button type="button" id="tool-paint" class="on" aria-pressed="true">塗る</button>
+    <button type="button" id="tool-fill" aria-pressed="false">塗りつぶし</button>
+    <button type="button" id="tool-pick" aria-pressed="false">スポイト</button>
+  </div>
+  <label>幅 <input type="number" id="pg-w" min="1" max="160" value="12"></label>
+  <label>高さ <input type="number" id="pg-h" min="1" max="160" value="8"></label>
+  <label>表示 <input type="range" id="pg-zoom" min="6" max="40" value="28"></label>
+  <button type="button" id="pg-clear">全消去</button>
+</div>
+<div class="pg-canvas-wrap"><canvas id="pg-canvas" aria-label="Piet プログラムの編集領域"></canvas></div>
+<div class="pg-hover" id="pg-hover">マウスを格子に重ねると、色とブロックの大きさを表示します。</div>
+</section>
+
+<section class="pg-side" aria-label="パレットと実行">
+<div class="pg-palette-wrap">
+  <div class="pg-sub">パレット <span id="pg-cur"></span></div>
+  <div class="pg-palette" id="pg-palette"></div>
+</div>
+<div class="pg-run">
+  <div class="pv-controls">
+    <button type="button" class="pv-run" id="pg-run">実行</button>
+    <button type="button" id="pg-play">再生</button>
+    <button type="button" id="pg-step">1 ステップ</button>
+    <button type="button" id="pg-reset">リセット</button>
+  </div>
+  <div class="pv-io has-input">
+    <div><label for="pg-input">入力</label><textarea class="pv-input" id="pg-input" rows="2" spellcheck="false"></textarea></div>
+    <div><label>出力</label><pre class="pv-out empty" id="pg-out" aria-live="polite"></pre></div>
+  </div>
+  <div class="pv-state" id="pg-state"></div>
+</div>
+<details class="pg-io-box">
+  <summary>読み込み・書き出し</summary>
+  <div class="pg-io-inner">
+    <label for="pg-sample">本書のサンプルを開く</label>
+    <select id="pg-sample"><option value="">（選択してください）</option></select>
+    <label for="pg-file">PNG / GIF 画像を開く</label>
+    <input type="file" id="pg-file" accept="image/png,image/gif,image/bmp">
+    <label for="pg-text">テキスト記法（1 文字 = 1 コーデル。淡: rygcbm、通常: RYGCBM、濃: 123456、白 .、黒 #）</label>
+    <textarea id="pg-text" rows="6" spellcheck="false"></textarea>
+    <div class="pg-row"><button type="button" id="pg-text-load">テキストから読み込む</button><button type="button" id="pg-text-copy">テキストをコピー</button></div>
+    <label>画像（コーデル 10px。長押し・右クリックで保存できます）</label>
+    <div class="pg-export"><img id="pg-png" alt="現在のプログラムの画像"></div>
+  </div>
+</details>
+</section>
+</div>
+</div></main>
+<style>
+.pg { max-width: 76rem; margin: 0 auto; }
+.pg-head h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0.5rem 0 0.4rem; }
+.pg-head p { max-width: 46rem; margin: 0 0 1.4rem; color: var(--muted); }
+.pg-layout { display: grid; gap: 1.4rem; }
+@media (min-width: 980px) { .pg-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; } }
+.pg-editor, .pg-side { min-width: 0; display: grid; gap: 0.8rem; }
+.pg-toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; font-size: 0.85rem; }
+.pg-toolbar input[type=number] { width: 4.2rem; font: inherit; padding: 0.15rem 0.3rem; border: 1.5px solid var(--line); border-radius: 3px; background: var(--bg); color: var(--ink); }
+.pg-toolbar input[type=range] { width: 7rem; vertical-align: middle; }
+.pg-tools { display: inline-flex; border: 2px solid var(--rule); border-radius: 3px; overflow: hidden; }
+.pg-tools button { font: inherit; font-weight: 700; padding: 0.2rem 0.7rem; border: 0; background: var(--bg); color: var(--ink); cursor: pointer; }
+.pg-tools button + button { border-left: 2px solid var(--rule); }
+.pg-tools button.on { background: var(--ink); color: var(--bg); }
+.pg-toolbar > button, .pg-row button { font: inherit; font-weight: 700; padding: 0.2rem 0.7rem; border: 2px solid var(--rule); border-radius: 3px; background: var(--bg); color: var(--ink); cursor: pointer; }
+.pg-canvas-wrap { overflow: auto; max-height: 70vh; background: var(--surface); padding: 0.8rem; border: 2px solid var(--rule); border-radius: 4px; }
+.pg-canvas-wrap canvas { display: block; image-rendering: pixelated; cursor: crosshair; touch-action: none; max-width: none; }
+.pg-hover { font-size: 0.82rem; color: var(--muted); min-height: 1.4em; font-variant-numeric: tabular-nums; }
+.pg-sub { font-size: 0.75rem; letter-spacing: 0.08em; font-weight: 700; color: var(--muted); margin-bottom: 0.3rem; }
+.pg-sub span { letter-spacing: 0; color: var(--ink); margin-left: 0.4rem; }
+.pg-palette { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; }
+.pg-palette button { aspect-ratio: 1.35; border: 2px solid transparent; border-radius: 3px; cursor: pointer; font: inherit; font-size: 0.66rem; line-height: 1.15; font-weight: 700; padding: 2px; overflow: hidden; word-break: break-all; color: #000; }
+.pg-palette button.dk { color: #fff; }
+.pg-palette button.sel { border-color: var(--ink); box-shadow: 0 0 0 2px var(--bg) inset; }
+.pg-palette button.wh { border-color: var(--line); }
+.pg-palette .wide { grid-column: span 3; aspect-ratio: auto; height: 2.2rem; }
+.pg-run { display: grid; gap: 0.55rem; border: 2px solid var(--rule); border-radius: 4px; padding: 0.7rem 0.8rem; }
+.pg-io-box { border: 2px solid var(--line); border-radius: 4px; padding: 0.5rem 0.8rem; }
+.pg-io-box summary { cursor: pointer; font-weight: 700; }
+.pg-io-inner { display: grid; gap: 0.4rem; margin-top: 0.6rem; font-size: 0.85rem; }
+.pg-io-inner label { font-size: 0.75rem; color: var(--muted); font-weight: 700; margin-top: 0.4rem; }
+.pg-io-inner select, .pg-io-inner textarea { font: inherit; font-family: var(--font-mono); width: 100%; border: 1.5px solid var(--line); border-radius: 3px; padding: 0.3rem; background: var(--bg); color: var(--ink); }
+.pg-io-inner select { font-family: var(--font-body); }
+.pg-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pg-export { background: var(--surface); padding: 0.5rem; overflow: auto; }
+.pg-export img { image-rendering: pixelated; max-width: 100%; }
+</style>

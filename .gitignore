@@ -1,3 +1,22 @@
+# 生成物（tools/build.py・tools/samples.py・print/build.sh で作り直せる）
+site/*
+!site/img/
+site/img/*
+!site/img/ch02/
+!site/img/ch19/
+site/img/ch02/*
+!site/img/ch02/seven-trace.png
+!site/img/ch02/studio.png
+site/img/ch19/*
+!site/img/ch19/studio-break.png
+!site/img/ch19/trace-*_fix.png
+print/out/
+print/node_modules/
+print/fonts/
+print/book.html
+print/cover.html
+print/mono_marker.txt
+ext/
 build/
 __pycache__/
 *.pyc

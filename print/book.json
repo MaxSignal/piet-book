@@ -1,0 +1,62 @@
+{
+  "title": "Piet プログラミング入門",
+  "title_html": "Piet<br>プログラミング<br>入門",
+  "subtitle": "絵を描いてプログラムを書く",
+  "author": "MaxSignal 著",
+  "edition": "2026年11月10日　初版第1刷 発行",
+  "verso_note": "本書に掲載した Piet のプログラムはすべて、本書付属のインタプリタ piet.py と npiet 1.3h の両方で実行し、出力を確認しています。<br>Piet は David Morgan-Mar 氏が設計したプログラミング言語です。本書に記載した会社名・製品名は、各社の商標または登録商標です。",
+  "colophon": [
+    [
+      "著者",
+      "MaxSignal"
+    ],
+    [
+      "発行所",
+      "-Rainy Angel-"
+    ],
+    [
+      "連絡先",
+      "X（旧Twitter） @MaxSignal_"
+    ],
+    [
+      "印刷・製本",
+      ""
+    ]
+  ],
+  "colophon_note": "本書の内容は 2026 年 11 月時点の情報に基づいています。<br>落丁・乱丁本はお取り替えいたします。",
+  "paper_note": "ちょ古っ都製本工房の背幅計算（本文厚み＋表紙の紙厚×2）。本文 上質70kg、表紙 アートポスト紙200kg（約0.22mm）＋マットPP。実際の背幅は自動見積もりの原稿サイズを使う（tools/chokotto.py）",
+  "back_blurb": [
+    "色のついたマス目を並べた「絵」が、そのままプログラムになる言語 Piet（ピート）。色が変わるたびに命令が実行され、色の塊の大きさが数になり、黒い壁と白い通路が処理の流れを導きます。",
+    "本書は、たった 2 ステップで動く小さな絵から始めて、スタックと算術、入出力、分岐とループ、数値計算や文字列処理、そして Piet のインタプリタ・アセンブラ・コンパイラの自作まで、Piet を体系的に解説します。",
+    "掲載した 183 点のプログラムはすべて、付属のインタプリタと npiet の両方で実行して確かめています。描いてすぐ動かせる Python 製のエディタ兼デバッガ「Piet スタジオ」のソースコードも全文収録。"
+  ],
+  "spine_mm_per_page": 0.05,
+  "cover_paper_mm": 0.22,
+  "sale": {
+    "author": "MaxSignal 著",
+    "colophon": [
+      [
+        "著者",
+        "MaxSignal"
+      ],
+      [
+        "発行所",
+        "-Rainy Angel-"
+      ],
+      [
+        "連絡先",
+        "X（旧Twitter） @MaxSignal_"
+      ],
+      [
+        "印刷・製本",
+        "ちょ古っ都製本工房"
+      ]
+    ],
+    "isdn": "",
+    "ccode": "C3055",
+    "price": 2520,
+    "ai_credit": "本書の文章・サンプルプログラム・付属ツールは、AI アシスタントの Claude（Anthropic）を用いて作成しました。",
+    "tools_license": "本書の原稿・PDF、付属ツールのソースコード、サンプルプログラムは GitHub（https://github.com/MaxSignal/piet-book）で公開しています。ライセンスは CC0 1.0（パブリックドメイン提供）です。"
+  },
+  "github": "https://github.com/MaxSignal/piet-book"
+}

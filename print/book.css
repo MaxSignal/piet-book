@@ -1,0 +1,211 @@
+/* 『Piet プログラミング入門』書籍版（B5 判・横組み） */
+@font-face { font-family: "Dela Gothic One"; src: url("fonts/DelaGothicOne-Regular.ttf"); }
+
+@page {
+  size: 182mm 257mm;           /* B5 判（JIS） */
+  bleed: 3mm;                  /* 塗り足し */
+  margin-top: 21mm;
+  margin-bottom: 21mm;
+  font-family: "Noto Sans CJK JP", sans-serif;
+  font-size: 7.5pt;
+  color: #333;
+}
+@page :left {
+  margin-left: 18mm; margin-right: 22mm;
+  @top-left { content: string(chap); vertical-align: bottom; padding-bottom: 4mm; }
+  @bottom-left { content: counter(page); vertical-align: top; padding-top: 6mm; font-size: 8pt; }
+}
+@page :right {
+  margin-left: 22mm; margin-right: 18mm;
+  @top-right { content: string(sec); vertical-align: bottom; padding-bottom: 4mm; }
+  @bottom-right { content: counter(page); vertical-align: top; padding-top: 6mm; font-size: 8pt; }
+}
+/* 扉・章扉・空白ページには柱とノンブルを出さない */
+@page :blank { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page title { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page part { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page opener:first { @top-left { content: none; } @top-right { content: none; } }
+
+html { font-family: "Noto Serif CJK JP", serif; font-size: 9pt; line-height: 1.78; color: #000; }
+body { margin: 0; }
+* { box-sizing: border-box; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- 扉 */
+.titlepage { page: title; break-after: page; height: 215mm; position: relative; }
+.tp-band { height: 7mm; margin: 6mm 0 22mm; background: linear-gradient(90deg, #FF0000 0 16.66%, #FFFF00 0 33.33%, #00FF00 0 50%, #00FFFF 0 66.66%, #0000FF 0 83.33%, #FF00FF 0); border: 0.6mm solid #000; }
+.tp-title { font-family: "Dela Gothic One", "Noto Sans CJK JP", sans-serif; font-size: 40pt; line-height: 1.18; }
+.tp-sub { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 14pt; margin-top: 8mm; color: #333; }
+.tp-author { position: absolute; bottom: 0; font-family: "Noto Sans CJK JP", sans-serif; font-size: 12pt; }
+.titleverso { page: title; break-after: right; height: 215mm; display: flex; align-items: flex-end; font-size: 7.5pt; color: #444; line-height: 1.7; }
+
+/* ---------- 部扉 */
+.part-open { page: part; break-before: right; break-after: right; height: 215mm; position: relative; string-set: chap attr(data-run) , sec ""; }
+.part-no { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 13pt; letter-spacing: 0.15em; margin-top: 30mm; border-top: 2.2mm solid #000; padding-top: 5mm; }
+.part-title { font-family: "Dela Gothic One", "Noto Sans CJK JP", sans-serif; font-weight: 400; font-size: 30pt; line-height: 1.3; margin: 4mm 0 8mm; }
+.part-desc { font-size: 9.5pt; width: 110mm; }
+.part-list { list-style: none; padding: 0; margin: 10mm 0 0; font-family: "Noto Sans CJK JP", sans-serif; font-size: 10pt; line-height: 2.1; }
+.part-list span { display: inline-block; width: 18mm; color: #555; }
+.part-band { position: absolute; bottom: 0; left: 0; right: 0; height: 5mm; background: linear-gradient(90deg, #FF0000 0 16.66%, #FFFF00 0 33.33%, #00FF00 0 50%, #00FFFF 0 66.66%, #0000FF 0 83.33%, #FF00FF 0); border: 0.5mm solid #000; }
+
+/* ---------- 章扉 */
+section.chapter, section.appendix, section.front, section.toc { page: opener; break-before: right; }
+section#appD, section#appE, section#appF, section#appG, section#index { break-before: right; }
+.ch-open { border-top: 2.2mm solid #000; padding-top: 4mm; margin-bottom: 9mm; }
+.ch-no { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 11pt; color: #444; letter-spacing: 0.08em; min-height: 1em; }
+.ch-title { font-family: "Dela Gothic One", "Noto Sans CJK JP", sans-serif; font-weight: 400; font-size: 23pt; line-height: 1.3; margin: 1.5mm 0 4mm; string-set: chap attr(data-run), sec ""; }
+.ch-strip { display: flex; flex-direction: column; gap: 1.2mm; }
+.ch-strip-cap { font-family: "Noto Sans CJK JP", sans-serif; font-size: 6.5pt; color: #555; }
+.strip-svg { display: block; }
+
+/* ---------- 本文 */
+.prose p { margin: 0 0 0.9em; text-align: justify; text-indent: 1em; }
+.prose li p, .prose .admonition p, .prose td p, .prose dd p, .prose blockquote p { text-indent: 0; }
+.prose h2 { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 13.5pt; line-height: 1.45; margin: 9mm 0 3.5mm; padding-top: 2mm; border-top: 0.8mm solid #000; break-after: avoid; string-set: sec content(); }
+.prose h3 { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 10.5pt; margin: 6mm 0 2mm; break-after: avoid; }
+.prose h4 { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 9.5pt; margin: 4mm 0 1.5mm; break-after: avoid; }
+.prose ul, .prose ol { margin: 0 0 0.9em; padding-left: 1.6em; }
+.prose li { margin: 0.1em 0; }
+.prose strong { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; }
+.prose code { font-family: "Noto Sans Mono", "Noto Sans CJK JP", monospace; font-size: 0.86em; background: #eeeeee; padding: 0 0.2em; border-radius: 0.5mm; }
+.prose pre { font-family: "Noto Sans Mono", "Noto Sans CJK JP", monospace; font-size: 7.3pt; line-height: 1.5; background: #f1f1f1; padding: 2.5mm 3mm; margin: 0 0 1em; white-space: pre-wrap; word-break: break-all; border-radius: 1mm; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose pre.trace { border-left: 1mm solid #000; font-size: 6.9pt; }
+.prose pre.grid { letter-spacing: 0.2em; line-height: 1.25; }
+.prose table { border-collapse: collapse; font-size: 7.8pt; line-height: 1.55; margin: 0 0 1.1em; width: 100%; font-family: "Noto Sans CJK JP", sans-serif; break-inside: auto; }
+.prose th, .prose td { border-bottom: 0.2mm solid #999; padding: 1mm 1.6mm; text-align: left; vertical-align: top; }
+.prose th { border-bottom: 0.45mm solid #000; font-weight: 700; }
+.prose thead { display: table-header-group; }
+.prose dl { margin: 0 0 0.9em; }
+.prose dt { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; margin-top: 0.6em; break-after: avoid; }
+.prose dd { margin: 0 0 0 1.5em; }
+.prose blockquote { margin: 0 0 1em; padding-left: 3mm; border-left: 0.6mm solid #999; color: #333; }
+.prose hr { border: 0; border-top: 0.2mm solid #999; }
+.prose img { max-width: 100%; }
+
+/* 注記 */
+.admonition { margin: 0 0 1.1em; padding: 2.4mm 3.2mm 0.6mm; background: #f2f2f2; border-left: 1.1mm solid #0000C0; break-inside: avoid; font-size: 8.6pt; }
+.admonition .admonition-title { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; margin: 0 0 1mm; text-indent: 0; }
+.admonition.tip { border-left-color: #00A000; }
+.admonition.warning { border-left-color: #C00000; }
+.admonition.column { background: #fff; border: 0.3mm solid #777; border-left: 1.1mm solid #C000C0; break-inside: auto; }
+.admonition.abstract { background: #fff; border: 0; border-top: 0.6mm solid #000; border-bottom: 0.3mm solid #000; padding: 2mm 0 0.6mm; }
+
+/* 色表・命令表 */
+.sw { display: inline-block; width: 0.9em; height: 0.9em; vertical-align: -0.1em; border: 0.15mm solid #000; margin-right: 0.3em; }
+table.colortable td.chip { font-family: "Noto Sans Mono", "Noto Sans CJK JP", monospace; font-size: 7pt; color: #000; border: 0.15mm solid #fff; }
+table.colortable td.chip.darkchip { color: #fff; }
+
+/* ---------- Piet の図 */
+figure { margin: 2mm 0 5mm; break-inside: avoid; }
+.pfig .pimg { display: flex; justify-content: center; padding: 3mm 0 2.5mm; }
+.pfig.pbig { break-inside: auto; }
+.prun { font-family: "Noto Sans CJK JP", sans-serif; font-size: 7.5pt; border-top: 0.2mm solid #999; border-bottom: 0.2mm solid #999; padding: 1.2mm 0; display: flex; flex-direction: column; gap: 0.8mm; }
+.prun-row { display: flex; gap: 3mm; align-items: baseline; }
+.prun-k { flex: 0 0 13mm; font-weight: 700; color: #333; }
+.prun pre { margin: 0; flex: 1; font-family: "Noto Sans Mono", "Noto Sans CJK JP", monospace; font-size: 7.3pt; line-height: 1.45; white-space: pre-wrap; word-break: break-all; }
+.prun-note { padding-left: 16mm; color: #555; font-size: 7pt; }
+figcaption { font-family: "Noto Sans CJK JP", sans-serif; font-size: 7.8pt; line-height: 1.55; margin-top: 1.6mm; text-align: center; }
+figcaption .fno { font-weight: 700; margin-right: 0.8em; }
+figcaption .fsize { color: #555; margin-left: 0.3em; }
+.pimgfig { text-align: center; }
+.pimgfig img { display: block; margin: 0 auto 1mm; max-width: 100%; image-rendering: pixelated; border: 0.2mm solid #999; }
+
+/* ---------- 目次 */
+.toc-list { list-style: none; margin: 0; padding: 0; font-family: "Noto Sans CJK JP", sans-serif; }
+.toc-part { font-weight: 700; font-size: 10pt; margin: 4.5mm 0 1mm; border-bottom: 0.4mm solid #000; padding-bottom: 0.6mm; break-after: avoid; }
+.toc-ch a, .toc-sec a { display: flex; align-items: baseline; }
+.toc-ch { font-size: 9.2pt; font-weight: 700; margin-top: 1.4mm; }
+.toc-sec { font-size: 7.8pt; padding-left: 15mm; color: #222; line-height: 1.6; }
+.toc-no { display: inline-block; width: 15mm; flex: none; }
+.toc-ch a::after, .toc-sec a::after { content: target-counter(attr(href url), page); margin-left: auto; padding-left: 3mm; font-weight: 400; }
+.toc-part a::after { content: target-counter(attr(href url), page); float: right; font-weight: 400; }
+
+/* ---------- 索引 */
+.ix { columns: 2; column-gap: 8mm; font-family: "Noto Sans CJK JP", sans-serif; font-size: 7.8pt; }
+.ix-h { font-size: 10pt; font-weight: 700; border-top: 0.6mm solid #000; padding-top: 1mm; margin: 0 0 2mm; break-after: avoid; column-span: none; }
+.ix-list { list-style: none; padding: 0; margin: 0 0 5mm; }
+.ix-list li { display: flex; gap: 2mm; line-height: 1.6; break-inside: avoid; }
+.ix-list .ixt { flex: none; }
+.ix-list .ixps { margin-left: auto; text-align: right; }
+.ix-cmd .ixt { font-family: "Noto Sans Mono", monospace; }
+a.ixp::after { content: target-counter(attr(href url), page); }
+a.ixp + a.ixp::before { content: ", "; }
+
+/* ---------- 奥付 */
+.colophon { break-before: page; height: 215mm; display: flex; flex-direction: column; justify-content: flex-end; font-family: "Noto Sans CJK JP", sans-serif; page: title; }
+.col-title { font-size: 14pt; font-weight: 700; border-bottom: 0.5mm solid #000; padding-bottom: 1.5mm; }
+.col-sub { font-size: 9pt; margin-top: 1mm; }
+.col-date { font-size: 8.5pt; margin: 4mm 0 3mm; }
+.colophon table { font-size: 8.5pt; border-collapse: collapse; }
+.colophon th { text-align: left; font-weight: 400; color: #444; padding: 0.6mm 6mm 0.6mm 0; }
+.col-note { font-size: 7.2pt; color: #444; margin-top: 4mm; line-height: 1.7; border-top: 0.2mm solid #999; padding-top: 2mm; }
+
+/* 白ページ（ページ数調整） */
+.padpage { page: title; break-before: page; height: 1mm; }
+.padpage::before { content: "MEMO"; display: block; font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 10pt; letter-spacing: 0.2em; border-bottom: 0.3mm solid #000; padding-bottom: 1mm; }
+
+/* モノクロ印刷の章（第IV部・付録）: コードを大きめに */
+.mono .prose pre { font-size: 8.4pt; line-height: 1.5; }
+.mono .prose pre.trace { font-size: 7.6pt; }
+.part-note { font-size: 8.2pt; width: 120mm; margin-top: 8mm; padding: 2.5mm 3mm; border: 0.3mm solid #000; line-height: 1.7; }
+
+/* 版B: カラー図版 */
+.plates-lead { font-size: 8.6pt; margin: 0 0 5mm; }
+.plates-grid figure.plate { margin: 0 0 6mm; break-inside: avoid; }
+.plate .pimg { display: flex; justify-content: center; padding: 1mm 0 1.5mm; }
+.pref { margin-left: 0.6em; color: #000; font-weight: 700; }
+.pref a::after { content: target-counter(attr(href url), page); }
+/* 版C: 巻数 */
+.tp-vol { display: inline-block; margin-left: 6mm; font-size: 20pt; border: 1mm solid #000; padding: 0 3mm; vertical-align: 8pt; }
+/* 方眼メモ */
+.padpage::before { content: none; }
+.pad-head { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 10pt; letter-spacing: 0.15em; border-bottom: 0.3mm solid #000; padding-bottom: 1mm; margin-bottom: 4mm; height: auto; }
+.pad-head span { display: block; font-weight: 400; font-size: 7pt; letter-spacing: 0; color: #444; margin-top: 0.8mm; }
+.padpage { height: auto; }
+.padpage svg { display: block; }
+
+/* モノクロで分割した図 */
+.ptile { break-inside: avoid; margin-bottom: 2mm; }
+.ptile-cap { font-family: "Noto Sans CJK JP", sans-serif; font-size: 7pt; color: #333; text-align: center; margin-top: 1mm; }
+
+/* 巻頭の色と命令の早見表 */
+section.quickref { break-before: page; }
+#quickref2 { break-before: page; }
+.qr-lead { font-size: 8.4pt; margin: 0 0 3mm; text-indent: 0; }
+.qr-h { font-family: "Noto Sans CJK JP", sans-serif; font-weight: 700; font-size: 12pt; border-top: 0.8mm solid #000; padding-top: 1.5mm; margin: 3.5mm 0 1.5mm; }
+#quickref2 .qr-h { margin-top: 0; }
+.qr-colors { border-collapse: collapse; width: 100%; font-family: "Noto Sans CJK JP", sans-serif; margin-bottom: 3mm; }
+.qr-colors th { font-size: 8pt; font-weight: 700; text-align: left; padding: 1mm; border-bottom: 0.4mm solid #000; }
+.qr-colors td { padding: 0.7mm 1mm; border-bottom: 0.2mm solid #bbb; vertical-align: middle; }
+.qr-colors td .qr-chip { float: left; margin-right: 2.5mm; }
+.qr-name { font-size: 8.6pt; font-weight: 700; }
+.qr-hex { font-family: "Noto Sans Mono", monospace; font-size: 7.4pt; color: #444; }
+.qr-chip { display: inline-block; width: 6mm; height: 6mm; line-height: 6mm; text-align: center; font-family: "Noto Sans Mono", monospace; font-weight: 700; font-size: 8pt; border: 0.2mm solid #000; vertical-align: middle; }
+.qr-chip.big { width: 8.5mm; height: 8.5mm; line-height: 8.5mm; font-size: 11pt; }
+.qr-mono { font-family: "Noto Sans CJK JP", sans-serif; font-size: 7.8pt; line-height: 1.8; margin: 1mm 0 2mm; }
+.qr-mono .qr-chip { margin-right: 1mm; }
+.qr-cmds { border-collapse: collapse; width: 100%; font-family: "Noto Sans Mono", "Noto Sans CJK JP", monospace; font-size: 8.6pt; }
+.qr-cmds th, .qr-cmds td { border: 0.2mm solid #999; padding: 0.8mm 2mm; text-align: center; }
+.qr-cmds th { font-family: "Noto Sans CJK JP", sans-serif; background: #eee; }
+.qr-next { border-collapse: collapse; width: 100%; table-layout: fixed; }
+.qr-next th, .qr-next td { border: 0.15mm solid #bbb; padding: 0.25mm 0; text-align: center; line-height: 1; }
+.qr-next thead th { font-family: "Noto Sans Mono", monospace; font-size: 6.6pt; font-weight: 700; height: 10mm; vertical-align: bottom; }
+.qr-next thead th:first-child { font-family: "Noto Sans CJK JP", sans-serif; width: 11mm; }
+.qr-next thead th span { display: inline-block; transform: rotate(-90deg); transform-origin: center; white-space: nowrap; margin-bottom: 3mm; }
+.qr-next .qr-chip { width: 5mm; height: 5mm; line-height: 5mm; font-size: 6.8pt; }
+.mono-note { font-family: "Noto Sans CJK JP", sans-serif; font-size: 8.2pt; line-height: 1.7; border: 0.3mm solid #000; padding: 2mm 3mm; margin: 0 0 5mm; }
+a.pg::after { content: target-counter(attr(href url), page); }
+.qr-h.qr-h2 { margin-top: 5mm; }
+
+/* 隠しノンブル: 扉・部扉・白ページ・奥付にも、綴じ側の端に小さくページ番号を入れる（ちょ古っ都の入稿条件） */
+@page title:left { @bottom-right { content: counter(page); font-size: 5pt; color: #888; text-align: right; vertical-align: bottom; padding: 0 0.8mm 3mm 0; } }
+@page title:right { @bottom-left { content: counter(page); font-size: 5pt; color: #888; text-align: left; vertical-align: bottom; padding: 0 0 3mm 0.8mm; } }
+@page part:left { @bottom-right { content: counter(page); font-size: 5pt; color: #888; text-align: right; vertical-align: bottom; padding: 0 0.8mm 3mm 0; } }
+@page part:right { @bottom-left { content: counter(page); font-size: 5pt; color: #888; text-align: left; vertical-align: bottom; padding: 0 0 3mm 0.8mm; } }
+@page :blank:left { @bottom-right { content: counter(page); font-size: 5pt; color: #888; text-align: right; vertical-align: bottom; padding: 0 0.8mm 3mm 0; } }
+@page :blank:right { @bottom-left { content: counter(page); font-size: 5pt; color: #888; text-align: left; vertical-align: bottom; padding: 0 0 3mm 0.8mm; } }
+/* 方眼メモは柱なし・通常のノンブル */
+.padpage { page: memo; }
+@page memo:left { @top-left { content: none; } }
+@page memo:right { @top-right { content: none; } }

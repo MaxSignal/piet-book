@@ -13,8 +13,8 @@ samples/chNN/NAME.in    標準入力（任意。複数ケースは NAME.in2, NAM
 samples/chNN/NAME.out   期待される出力（任意。.in2 には .out2 が対応）
 samples/chNN/NAME.flags 特殊指定（任意）: "noterm" = 停止しないことが意図どおり（-e で打ち切って比較）
                                           "nonpiet" = npiet との比較を省略（仕様差の実演用）
-出力: build/chNN/NAME.png（コーデルサイズ 1） と NAME-big.png（コーデルサイズ 10）
-npiet は環境変数 NPIET か PATH 上の npiet を使う（見つからなければ npiet との比較を省略）
+出力: site/img/chNN/NAME.png（コーデルサイズ 1） と NAME-big.png（コーデルサイズ 10）
+npiet は環境変数 NPIET、PATH 上の npiet、ext/npiet-1.3h/npiet の順に探す（見つからなければ npiet との比較を省略）
 """
 import sys, os, glob, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +41,7 @@ def build_one(src):
         prog = pasm.assemble(minic.compile_src(open(src, encoding="utf-8").read()))
     else:
         return None
-    out = os.path.join(ROOT, "build", sid)
+    out = os.path.join(ROOT, "site/img", sid)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     prog.save_png(out + ".png", 1)
     prog.save_png(out + "-big.png", 10)
